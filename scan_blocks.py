@@ -2,10 +2,10 @@
 # scan_blocks_dir.py
 #
 #	Scans a local directory containing downloaded blockchain block files to detect gaps in the 
-#   sequence. The names of the missing files a stored in a list as the process continues.  
+#   sequence. The names of the missing files a stored in a list during the process.  
 #
 #   When the list is complete it is passed to a function that does an HTTP request for each file 
-#   sequentially and writes the retrieved file to the local diretory containing the blocks.
+#   and writes the retrieved file back to the local diretory filling those gaps.
 #
 #	Files found missing, are recorded to log and the file in each successful request is logged as 
 #   is the record of it being written to the directory.  
@@ -16,7 +16,7 @@ import requests
 import logging
 import json
 
-local_block_repository = "../tendermint"
+local_block_repository = "../blocks_repo"
 BLOCK_CHAIN_URL = "https://migaloo-api.polkachu.com/cosmos/base/tendermint/v1beta1/blocks/{}"
 
 # Configure logger
@@ -44,8 +44,6 @@ def fetch_missing_blocks(missing_blocks):
 
                 with open(file_path, "w", buffering=1024 * 1024) as file:
                     file.write(block_data_str)
-
-                # print(f"Wrote {block_number} ")
 
                 # Log success only once here
                 logging.infp(f"Downloaded block {block_number} fetched and stored.")

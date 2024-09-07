@@ -7,11 +7,16 @@
 #   Description:                                                                                                      
 #   This script scans the list 'blocks_collected' in the Redis store where the names of the block files downloaded 
 #   so far is contained. Thes files have numeric strings as names and are sequential so any gaps in the list cam be 
-#   detected. Any missing file are wrritten back to the Redis store                  
+#   detected. Any missing file are wrritten back to the Redis store 
+
+#   Usage:                                                                                                            
+#   - Ensure Redis is running and accessible.                                                                         
+#   - This scropt should usually run concurrently with 'gaps_fixer.py' and 'blocks_extractor.py', but can be executed 
+#     independntly.                   
 #                                                                                                                     
 #   Notes:
 #   - This is one cof three Python3 scripts that run concurrently, the othger two being 'blocks_collector.py' and
-#     'gaps_fixer.py'. They rin concurrently and communicate via a common Redis store.                                                                                                   
+#     'gaps_fixer.py'. They run concurrently and communicate via a common Redis store.                                                                                                   
 #   - The script runs for 60 seconds, in that time the script scans the Redis 5 times or every 12 seconds.                                                                               
 #   - Configure Redis connection parameters using environment variables (REDIS_HOST, REDIS_PORT, REDIS_DB).           
 #                                                                                                                     

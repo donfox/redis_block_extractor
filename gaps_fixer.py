@@ -10,7 +10,7 @@
 #                                                                                                                     
 #   Usage:                                                                                                            
 #   - Ensure Redis is running and accessible.                                                                         
-#   - This scropt should usually run concurrently with 'gaps_detector.py' and 'blocks_detector.py', but can be executed 
+#   - This scropt should usually run concurrently with 'gaps_detector.py' and 'blocks_extractor.py', but can be executed 
 #     independntly.                   
 #                                                                                                                     
 #   Notes:                                                                                                            
@@ -40,7 +40,7 @@ request_blocks_logger = logging.getLogger('blocks')
 
 # Global varaibles
 BLOCK_CHAIN_URL = "https://migaloo-api.polkachu.com/cosmos/base/tendermint/v1beta1/blocks/{}"
-local_block_repository = '../tendermint'
+local_block_repository = '../blocks_repo'
 
 def fetch_missing_blocks(missing_blocks):
 
